@@ -1,6 +1,6 @@
 /** 
  * @author Hithesh
- * @version 2.1
+ * @version 2.3
  * This class is to test the GenerateNextGen method in board class
  */
 package ConwaysGameOfLife;

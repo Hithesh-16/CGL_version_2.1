@@ -1,6 +1,6 @@
 /**
  * @author Hithesh Reddy K
- * version 2.30
+ * version 2.3
  * Took help from my Team Mate Ashish.
  */
 package ConwaysGameOfLife;

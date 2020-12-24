@@ -1,6 +1,6 @@
 /** 
  * @author Hithesh
- * @version 2.3
+ * @version 2.30
  */
 package ConwaysGameOfLife;
 import org.junit.jupiter.api.Assertions;

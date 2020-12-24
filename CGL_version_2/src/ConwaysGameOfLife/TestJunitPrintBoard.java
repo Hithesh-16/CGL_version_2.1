@@ -5,6 +5,11 @@
 package ConwaysGameOfLife;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+/**
+ * 
+ * To test the PrintBoard
+ *
+ */
 public class TestJunitPrintBoard {
 	@Test
 	public void printBoardtest1() {

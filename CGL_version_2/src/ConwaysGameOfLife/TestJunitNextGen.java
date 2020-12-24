@@ -1,11 +1,15 @@
 /** 
  * @author Hithesh
  * @version 2.1
+ * This class is to test the GenerateNextGen method in board class
  */
 package ConwaysGameOfLife;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 public class TestJunitNextGen {
+	/**
+	 * Test1 to test the next generation.
+	 */
 	@Test
 	public void nextGenTest1() {
 		boolean [][] present = {{false,false, true, false},{false,true,false,true},{false,true,true,false},{false, true, true, false}};
@@ -25,10 +29,10 @@ public class TestJunitNextGen {
 			}
 		}
 	    System.out.println("======TEST ONE EXECUTED=======");
-	    Assertions.assertEquals("false_false_false_false\n"
-	    		+ "false_true_false_false\n"
-	    		+ "false_true_true_false\n"
-	    		+ "false_false_false_false",str);
+	    Assertions.assertEquals("true_false_false_false\n"
+	    		+ "true_true_false_true\n"
+	    		+ "true_true_false_true\n"
+	    		+ "false_true_false_true",str);
 	}
 
 }

@@ -6,7 +6,11 @@ package ConwaysGameOfLife;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
+/**
+ * 
+ *It is to test the create board method
+ *
+ */
 public class TestJunitCreateBoard {
 	@Test
     public void BoardTest1() {
@@ -28,6 +32,9 @@ public class TestJunitCreateBoard {
 	    		+ "falsefalsefalse",str);
 
 }
+	/**
+	 * TestCase2 for create board
+	 */
 	@Test
 	public void BoardTest2() {
 		int live[][] = {{1,3},{1,4},{2,4}}; 

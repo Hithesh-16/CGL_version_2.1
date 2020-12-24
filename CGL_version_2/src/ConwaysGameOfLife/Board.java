@@ -21,7 +21,8 @@
  * 
  * 
  * @author <Hithesh Reddy K and 2020501016> 
- * @version Version2.2
+ * @version Version2.3
+ * Took help from my Team Mate Ashish Mylavarapu. 
  */
 
 
@@ -81,25 +82,51 @@ public class Board {
                 newBoard[i][j]=false;
                 }
             }
-            for(int i=1;i<n-1;i++) {
-            	for(int j=1;j<n-1;j++) {
-            		int count=0;
-            		if(present[i-1][j-1]==true) {
-            			count+=1;
-            		}
-            		if(present[i-1][j]==true|| present[i-1][j+1]==true|| present[i][j-1]==true||  present[i][j+1] ==true) {
-            			count+=1;
-            		}
-            		if(present[i+1][j-1]==true|| present[i+1][j]==true|| present[i+1][j+1]==true) {
-            			count+=1;
-            		}
+            for(int i=0;i<n;i++) {
+            	for(int j=0;j<n;j++) {
+            		int cnt=0;
+            		 int x = i -1;
+                     int y = j-1;
+                     if (x<0) {
+                     	x = present.length-1;
+                     }
+                     if (y <0) {
+                     	y =present.length-1;
+                     }
+                     if(present[x][y]==true){
+                         cnt+=1;
+                     }
+                     if(present[x][j]==true){
+                         cnt+=1;
+                     }																
+                     if(present[x][(j+1)%present.length]==true){
+                         cnt+=1;
+                     }
+                     if(present[i][y]==true){
+                         cnt+=1;
+                     }
+                     if(present[i][(j+1)%present.length]==true){
+                         cnt+=1;
+                     }
+                     if(present[(i+1)%present.length][y]==true){
+                         cnt+=1;
+                     }
+                     if(present[(i+1)%present.length][j]==true){
+                         cnt+=1;
+                     }
+                     if(present[(i+1)%present.length][(i+1)%present.length]==true){
+                         cnt+=1;
+                     }
+              
+
+            		
             		if(present[i][j]==true) {
-            			if(count==2||count==3) {
+            			if(cnt==2||cnt==3) {
             				newBoard[i][j]=true;
             			}
             		}
             		else {
-            			if(count==3) {
+            			if(cnt==3) {
             				newBoard[i][j]=true;
             			}
             		}

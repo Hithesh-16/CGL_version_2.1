@@ -268,7 +268,15 @@ public class UserInterface {
 	private void loadImageData() {
 		try {
 			// Your code goes here......
-			
+			while (scanner_Input.hasNextLine()) {
+				
+				// Read in the line and trim the white space before and after the real data
+				String inputLine = scanner_Input.nextLine().trim();
+				
+				// Construct a scanner to parse each input line (should be two integer values/line)
+				scanner_Line = new Scanner(inputLine);
+				int m = scanner_Line.nextInt();
+				int n = scanner_Line.nextInt();
 		}
 		catch (Exception e)  {
 			// Since we have already done this check, this exception should never happen

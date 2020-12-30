@@ -1,5 +1,4 @@
 package conwayJavaFX;
-import ConwaysGameOfLife.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -16,26 +15,27 @@ import javafx.scene.text.Font;
 import javafx.util.Duration;
 import javafx.scene.shape.Rectangle;
 
-/*******
+/***
  * <p> Title: UserInterface Class. </p>
  * 
  * <p> Description: A JavaFX demonstration application: This controller class describes the user
  * interface for the Conway's Game of Life </p>
  * 
- * <p> Copyright: Lynn Robert Carter Â© 2018-05-06 </p>
+ * <p> Copyright: LynnRobert Carter © 2018-05-06 </p>
  * 
- * @author Lynn Robert Carter
+ * @author LynnRobert Carter
+ * @author HitheshReddy K
  * 
  * @version 2.03	2018-05-07 An implementation baseline for JavaFX graphics
  * 
  */
 public class UserInterface {
 	
-	/**********************************************************************************************
+	/********************************
 
 	Class Attributes
 	
-	**********************************************************************************************/
+	********************************/
 
 	// Attributes used to establish the board and control panel within the window provided to us
 	private double controlPanelHeight = ConwayMain.WINDOW_HEIGHT - 110;
@@ -78,22 +78,22 @@ public class UserInterface {
 	// These attributes define the Board used by the simulation and the graphical representation
 	// There are two Boards. The previous Board and the new Board.  Once the new Board has been
 	// displayed, it becomes the previous Board for the generation of the next new Board.
-	//private Board oddGameBoard = new Board();		// The Board for odd frames of the animation
-	private Pane oddCanvas = new Pane();			// Pane that holds its graphical representation
+	private Board oddGameBoard = new Board(boardSizeWidth, boardSizeHeight);		// The Board for odd frames of the animation
+//	private Pane oddCanvas = new Pane();			// Pane that holds its graphical representation
 	
-	//private Board evenGameBoard =  new Board();	// The Board for even frames of the animation
-	private Pane evenCanvas = new Pane();			// Pane that holds its graphical representation
+	private Board evenGameBoard =  new Board(boardSizeWidth, boardSizeHeight);	// The Board for even frames of the animation
+//	private Pane evenCanvas = new Pane();			// Pane that holds its graphical representation
 
 	private boolean toggle = true;					// A two-state attribute that specifies which
 													// is the previous Board and which is the new
 	
-	/**********************************************************************************************
+	/********************************
 
 	Constructors
 	
-	**********************************************************************************************/
+	********************************/
 
-	/**********
+	/****
 	 * This constructor established the user interface with all of the graphical widgets that are
 	 * use to make the user interface work.
 	 * 
@@ -170,13 +170,13 @@ public class UserInterface {
 	}
 
 	
-	/**********************************************************************************************
+	/********************************
 
 	Helper methods - Used to set up the JavaFX widgets and simplify the code above
 	
-	**********************************************************************************************/
+	********************************/
 
-	/**********
+	/****
 	 * Private local method to initialize the standard fields for a label
 	 */
 	private void setupLabelUI(Label l, String ff, double f, double w, Pos p, double x, double y){
@@ -187,7 +187,7 @@ public class UserInterface {
 		l.setLayoutY(y);
 	}
 
-	/**********
+	/****
 	 * Private local method to initialize the standard fields for a text field
 	 */
 	private void setupTextUI(TextField t, String ff, double f, double w, Pos p, double x, double y, boolean e){
@@ -200,7 +200,7 @@ public class UserInterface {
 		t.setEditable(e);
 	}
 
-	/**********
+	/****
 	 * Private local method to initialize the standard fields for a button
 	 */
 	private void setupButtonUI(Button b, String ff, double f, double w, Pos p, double x, double y){
@@ -211,13 +211,13 @@ public class UserInterface {
 		b.setLayoutY(y);		
 	}
 	
-	/**********************************************************************************************
+	/********************************
 
 	Action methods - Used cause things to happen with the set up or during the simulation
 	
-	**********************************************************************************************/
+	********************************/
 
-	/**********
+	/****
 	 * This routine checks, after each character is typed, to see if the game of life file is there
 	 * and if so, sets up a scanner to it and enables a button to read it and run the simulation.  
 	 * If a file is not found, a warning message is displayed and the button is disabled.
@@ -261,22 +261,36 @@ public class UserInterface {
 			}
 	}
 
-	/**********
+	/****
 	 * This method is called when the Load button is pressed. It tries to load the data onto the
 	 * board for the simulation.
 	 */
 	private void loadImageData() {
 		try {
+			str_FileName = text_FileName.getText();	
+			Scanner scan = new Scanner(new File(str_FileName));
+			int count = 0;
+			while(scan.hasNextLine()) {
+				@SuppressWarnings("unused")
+				String[] s = scan.nextLine().split(" ");
+				count++;
+			}
+			int l[][] = new int[count][2];
+				
+			scan = new Scanner(new File(str_FileName));
+			int i = 0;
+			while(scan.hasNextLine()) {
+				String[] s = scan.nextLine().split(" ");
+				l[i][0] = Integer.parseInt(s[0]);
+				l[i][1] = Integer.parseInt(s[1]);
+				i++;
+				
+			}
+			oddGameBoard.createBoard(l);
+			addGraphics();
+			
 			// Your code goes here......
-			while (scanner_Input.hasNextLine()) {
-				
-				// Read in the line and trim the white space before and after the real data
-				String inputLine = scanner_Input.nextLine().trim();
-				
-				// Construct a scanner to parse each input line (should be two integer values/line)
-				scanner_Line = new Scanner(inputLine);
-				int m = scanner_Line.nextInt();
-				int n = scanner_Line.nextInt();
+			
 		}
 		catch (Exception e)  {
 			// Since we have already done this check, this exception should never happen
@@ -286,7 +300,7 @@ public class UserInterface {
 		button_Start.setDisable(false);				// Enable the Start button
 	};												// and wait for the User to press it.
 
-	/**********
+	/****
 	 * This method removes the start button, sets up the stop button, and starts the simulation
 	 */
 	private void startConway() {
@@ -300,7 +314,7 @@ public class UserInterface {
 		timeline.play();								// Start the animation
 	};
 	
-	/**********
+	/****
 	 * This method display the current state of the odd board and terminates the application
 	 */
 	private void stopConway() {
@@ -309,22 +323,37 @@ public class UserInterface {
 		System.exit(0);
 	}
 
-	/**********
+	/****
 	 * This method is run each time the timeline triggers it
 	 */
 	public void runSimulation(){
 		// Use the toggle to flip back and forth between the current generation and next generation boards.
 		
 		// Your code goes here...
+		if(toggle==false) {
+			
+			evenGameBoard.nextGeneration(oddGameBoard);
+			toggle = true;
+			//System.out.println(oddGameBoard);
+		}
+		else {
+			oddGameBoard.nextGeneration(evenGameBoard);
+			toggle = false;
+			
+			//System.out.println(evenGameBoard);
+			
+		}
+		addGraphics();
+		
 	}
 
-	/**********
+	/****
 	 * This method reads in the contents of the data file and discards it as quickly as it reads it
 	 * in order to verify that the data meets the input data specifications and helps reduce the 
 	 * change that invalid input data can lead to some kind of hacking.
 	 * 
-	 * @return	true - 	when the input file *is* valid
-	 * 					when the input file data is *not* valid - The method also sets a string with
+	 * @return	true - 	when the input file is valid
+	 * 					when the input file data is not valid - The method also sets a string with
 	 * 						details about what is wrong with the input data so the user can fix it
 	 */
 	private boolean fileContentsAreValid() {
@@ -366,7 +395,7 @@ public class UserInterface {
 						return false;			// Second value (col index) is out of range
 					}
 					
-					// After two int values on the line, there should be nothing else
+					// After two Int values on the line, there should be nothing else
 					if (scanner_Line.hasNext()) {
 						errorMessage_FileContents = "It is not valid to have characters following the two integers on a line.\n" +
 								"Line number " + lineNumber + ": " + inputLine;	
@@ -394,4 +423,28 @@ public class UserInterface {
 		errorMessage_FileContents = "";
 		return true;							// End of file found 
 	}
-}
+	/*
+	 * this function adds rectangles to the alive cells(to window)
+	 */
+	public void addGraphics() {
+		Board board;
+		if(toggle) {
+			board = oddGameBoard;
+			
+		}
+		else {
+			board = evenGameBoard;
+		}
+		for(int i = 0; i<board.rows; i++) {
+			for(int j= 0; j<board.columns; j++) {
+				if(board.grid[i][j].isAlive) {
+					Rectangle rect = new Rectangle(5,5,Color.GREEN);
+					rect.relocate(6*i, 6*j);
+					window.getChildren().add(rect);
+				}
+			}
+				
+			}
+		}
+		
+	}

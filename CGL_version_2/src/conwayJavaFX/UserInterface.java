@@ -271,22 +271,22 @@ public class UserInterface {
 	private void loadImageData() {
 		Board ob = new Board();										// created object
 		try {
-			str_FileName = text_FileName.getText();	
+			str_FileName = text_FileName.getText();					// We can just give the fileName here where we can get the content
 			Scanner scan = new Scanner(new File(str_FileName));		//To read fileName.
 			int count = 0;											// intialized count as 0.
 			while(scan.hasNextLine()) {
 				@SuppressWarnings("unused")
-				String[] s = scan.nextLine().split(" ");			//increamented count variable. for every space.
+				String[] s = scan.nextLine().split(" ");			//increamented count variable. for every line we read.
 				count++;
 			}
-			int l[][] = new int[count][2];
+			int l[][] = new int[count][2];							// Intialized l array with count and 2 as arguments.
 				
-			scan = new Scanner(new File(str_FileName));
+			scan = new Scanner(new File(str_FileName));				//Reading the FileName.
 			int i = 0;
 			while(scan.hasNextLine()) {
-				String[] s = scan.nextLine().split(" ");
+				String[] s = scan.nextLine().split(" ");			// Splitting each input with a space.
 				l[i][0] = Integer.parseInt(s[0]);					// parsing the value into integer
-				l[i][1] = Integer.parseInt(s[1]);
+				l[i][1] = Integer.parseInt(s[1]);					// parsing the value into int.
 				i++;
 				
 			}
@@ -338,8 +338,8 @@ public class UserInterface {
 		
 		// Your code goes here...
 		window.getChildren().remove(oddCanvas);				//here the oddCanvas will get removed.
-		oddCanvas = new Pane();
-		Board obj = new Board();
+		oddCanvas = new Pane();								
+		Board obj = new Board();							// New object created as obj.
 		nextGen = obj.generateNextGeneration(currentGen);	//assigning currentGenertion to the next Generation.
 		addGraphics(nextGen);								//Calling addGraphics for nextGeneration.
 		
@@ -459,17 +459,17 @@ public class UserInterface {
 //		odd.getChildren().clear;
 		
 		
-		for(int i=0;i<arr.length;i++){
-            for(int j=0;j<arr[i].length;j++){
-                if(arr[i][j]){
-					Rectangle rect = new Rectangle(5,5,Color.DARKORANGE);  // adding color to the rectangle
-					rect.relocate(6*i, 6*j);
-					oddCanvas.getChildren().add(rect);						// adding rectangle to oddCanvas.
+		for(int i=0;i<arr.length;i++){											// Iterating throw rows
+            for(int j=0;j<arr[i].length;j++){									// Iterating throw columns.
+                if(arr[i][j]){													// Checking the condition as true or not.
+					Rectangle rect = new Rectangle(5,5,Color.DARKORANGE);  		// adding color to the rectangle
+					rect.relocate(6*i, 6*j);									// relocating the rect
+					oddCanvas.getChildren().add(rect);							// adding rectangle to oddCanvas.
 				}
 			}
 				
 			}
-		window.getChildren().add(oddCanvas);
+		window.getChildren().add(oddCanvas);									// adding oddCanvas.
 		}
 		
 	}

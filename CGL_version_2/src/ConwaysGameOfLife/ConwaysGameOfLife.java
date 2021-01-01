@@ -16,7 +16,7 @@ public class ConwaysGameOfLife {
 	 * @return
 	 */
 
-	public String start(String input, int n, int[][] livecells, int shift, int generation) {
+	public String start(String input,int m, int n, int[][] livecells, int shift, int generation) {
 		boolean condition;
 		if (input.equals("start")) {
 			condition = true;
@@ -31,7 +31,7 @@ public class ConwaysGameOfLife {
 				boolean[][] currentGen = null;
 				for (int i = 0; i < generation; i++) {
 					if (i == 0) {
-						currentGen = obj.createBoard(n, livecells);
+						currentGen = obj.createBoard(m,n, livecells);
 
 					} else {
 						nextGen = obj.generateNextGeneration(currentGen);
@@ -51,7 +51,7 @@ public class ConwaysGameOfLife {
 				boolean[][] currentGen = null;
 				for (int i = 0;; i++) {
 					if (i == 0) {
-						currentGen = obj.createBoard(n, livecells);
+						currentGen = obj.createBoard(m,n, livecells);
 
 					} else {
 						nextGen = obj.generateNextGeneration(currentGen);

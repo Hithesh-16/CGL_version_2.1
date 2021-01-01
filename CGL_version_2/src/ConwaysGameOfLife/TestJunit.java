@@ -17,11 +17,13 @@ public class TestJunit {
 	public void testStartOne() {
 		String str = "start";
 		int n = 5;
+		int m=5;
 		int [][] livecells = {{1,1},{2,2},{3,3}};
 		int shift =1;
 		int gen =1;
 		ConwaysGameOfLife con = new ConwaysGameOfLife();
-		String newPrint = con.start(str, n, livecells,shift, gen);
+		String newPrint = con.start(str,m, n, livecells,shift, gen);
+		
 		String testing =".....\n"
 				+ ".*...\n"
 				+ "..*..\n"
@@ -36,11 +38,12 @@ public class TestJunit {
 	public void testStartTwo() { 
 		String str = "end";
 		int n = 5;
+		int m=5;
 		int [][] livecells = {{1,1},{2,1},{3,1}};
 		int shift =1;
 		int gen =1;
 		ConwaysGameOfLife con = new ConwaysGameOfLife();
-		String newPrint = con.start(str, n, livecells,shift, gen);
+		String newPrint = con.start(str,m, n, livecells,shift, gen);
 		String testing ="";
 		Assertions.assertEquals(testing,newPrint);
 	}
@@ -51,11 +54,12 @@ public class TestJunit {
 	public void testStartThree() {
 		String str = "start";
 		int n = 5;
+		int m=5;
 		int [][] livecells = {{1,1},{1,3},{2,2},{2,3},{3,1},{3,3}};
 		int shift =1;
 		int gen =2;
 		ConwaysGameOfLife con = new ConwaysGameOfLife();
-		String newPrint = con.start(str, n, livecells,shift, gen);
+		String newPrint = con.start(str,m, n, livecells,shift, gen);
 		String testing =".....\n"
 				+ "...**\n"
 				+ ".....\n"
@@ -69,12 +73,13 @@ public class TestJunit {
 	@Test
 	public void testStartFour() {
 		String str = "start";
+		int m =5;
 		int n = 5;
 		int [][] livecells = {{1,1},{1,3},{2,2},{2,3},{3,1},{3,3}};
 		int shift =2;
 		int gen =2;
 		ConwaysGameOfLife con = new ConwaysGameOfLife();
-		String newPrint = con.start(str, n, livecells,shift, gen);
+		String newPrint = con.start(str,m, n, livecells,shift, gen);
 		String testing =".....\n"
 				+ ".....\n"
 				+ ".....\n"
@@ -88,12 +93,13 @@ public class TestJunit {
 	@Test
 	public void testStartFive() {
 		String str = "start";
+		int m=5;
 		int n = 5;
 		int [][] livecells = {{1,1},{1,3},{2,2},{2,3},{3,1},{3,3}};
 		int shift =1;
 		int gen =5;
 		ConwaysGameOfLife con = new ConwaysGameOfLife();
-		String newPrint = con.start(str, n, livecells,shift, gen);
+		String newPrint = con.start(str,m,n, livecells,shift, gen);
 		String testing =".....\n"
 				+ ".....\n"
 				+ ".....\n"

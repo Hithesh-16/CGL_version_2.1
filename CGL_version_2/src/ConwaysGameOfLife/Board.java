@@ -29,16 +29,18 @@
 
 package ConwaysGameOfLife;
 
+import javafx.scene.control.TextInputControl;
 
 public class Board {
-	public boolean[][] createBoard(int n, int l[][]) {
-        boolean [][] board = new boolean [n][n];
+	public boolean[][] createBoard(int m, int n, int l[][]) {
+        boolean [][] board = new boolean [m][n];
         for(int i=0;i<l.length;i++){
             int row= l[i][0];
             int col = l[i][1];
             board[row][col]=true;
         }
         return board;
+        
     }
 	
 	
@@ -53,7 +55,7 @@ public class Board {
     public String printBoard(boolean board[][]) {
         StringBuffer sb= new StringBuffer();
         for(int i=0;i<board.length;i++){
-            for(int j=0;j<board.length;j++){
+            for(int j=0;j<board[0].length;j++){
                 if(board[i][j]){
                     sb.append("*");
                 }
@@ -75,14 +77,15 @@ public class Board {
      * @return
      */
     public boolean[][] generateNextGeneration(boolean present[][]) {
-        int n= present.length;
-        boolean[][] newBoard = new boolean[n][n];
-        for(int i=0;i<n;i++){
+        int m= present.length;
+        int n= present[0].length; 
+        boolean[][] newBoard = new boolean[m][n];
+        for(int i=0;i<m;i++){
             for(int j=0;j<n;j++){
                 newBoard[i][j]=false;
                 }
             }
-            for(int i=0;i<n;i++) {
+            for(int i=0;i<m;i++) {
             	for(int j=0;j<n;j++) {
             		int cnt=0;
             		 int x = i -1;
@@ -114,7 +117,7 @@ public class Board {
                      if(present[(i+1)%present.length][j]==true){
                          cnt+=1;
                      }
-                     if(present[(i+1)%present.length][(i+1)%present.length]==true){
+                     if(present[(i+1)%present.length][(j+1)%present.length]==true){
                          cnt+=1;
                      }
               
@@ -135,6 +138,12 @@ public class Board {
             }
             return newBoard;
     }
+
+
+	public TextInputControl getChildren() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
 
 

@@ -17,13 +17,14 @@ public class TestJunitCreateBoard {
 		int live[][] = {{1,2}}; 
 		Board b = new Board();
 		String str="";
-		boolean [][] arr=b.createBoard(3, live);
+		boolean [][] arr=b.createBoard(3,3, live);
 		for(int i=0;i<arr.length;i++) {
 			for(int j=0;j<arr.length;j++) {
 				str+=arr[i][j];
 			}
 			if(i<arr.length-1) {
 				str+="\n";
+				
 			}
 		}
 	    System.out.println("======TEST ONE EXECUTED=======");
@@ -40,7 +41,7 @@ public class TestJunitCreateBoard {
 		int live[][] = {{1,3},{1,4},{2,4}}; 
 		Board b = new Board();
 		String str="";
-		boolean [][] arr = b.createBoard(5, live);
+		boolean [][] arr = b.createBoard(5,5, live);
 		for(int i=0;i<arr.length;i++) {
 			for(int j=0;j<arr.length;j++) {
 				str+=arr[i][j];
